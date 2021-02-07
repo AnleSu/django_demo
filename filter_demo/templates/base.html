@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<header>
+    <ul>
+        <li>
+            <a href="/">首页</a>
+        </li>
+        <li>
+            <a href="{% url 'company' %}">公司</a>
+        </li>
+        <li>
+            <a href="{% url 'school' %}">校园</a>
+        </li>
+{#        可以读取子模板中的参数 #}
+        <li>{{ username }}</li>
+    </ul>
+</header>
+<div class="content">
+    {% block content %}
+        我是父模板
+    {% endblock %}
+</div>
+<footer>
+    这是footer
+</footer>
+</body>
+</html>

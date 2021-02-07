@@ -1,0 +1,8 @@
+{#继承父模板#}
+{% extends 'base.html' %}
+{% block content %}
+    {{ block.super }}
+    这是首页
+{% endblock %}
+
+block外面的代码 不加载不渲染

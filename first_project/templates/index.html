@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            background: pink;
+        }
+		.nav {
+			overflow: hidden;
+		}
+		.nav li {
+			float: left;
+			list-style: none;
+			margin: 0 20px;
+		}
+    </style>
+</head>
+<body>
+    这个是模板中渲染的字符串
+<!-- views.py中传入的参数 context    -->
+    {{ username }}
+ <!-- views.py中传入的参数 person类    -->
+    {{ person.username }}
+<!--  views.py中传入的参数 字典类型 也用.来取值  -->
+    {{ personDic.username }}
+<!--    数组类型 也用.下标来取值-->
+    {{ persons.0 }}
+
+<!-- if标签的使用 -->
+    {% if age < 18  %}
+        <p>未成年</p>
+    {% elif age == 18 %}
+        <p>满18</p>
+    {% else %}
+        <p>成年人了</p>
+    {% endif %}
+
+    {% if '鲁班' in heros %}
+        <p>鲁班在</p>
+    {% else %}
+        <p>鲁班不在</p>
+    {% endif %}
+
+<!--    for标签的使用 遍历数组  reversed反向遍历 -->
+    {% for foo in heros reversed %}
+        <li>{{ foo }}</li>
+    {% endfor %}
+
+<!--   for标签的使用 遍历字典的keys -->
+    <ul>
+        {% for key in person.keys %}
+        <li>{{ key }}</li>
+        {% endfor %}
+    </ul>
+
+<!--   for标签的使用 遍历字典的values -->
+    <ul>
+        {% for value in person.values %}
+        <li>{{ value }}</li>
+        {% endfor %}
+    </ul>
+
+<!--   for标签的使用 遍历字典的键值对 -->
+    <ul>
+        {% for key,value in person.items %}
+        <li>{{ key }}/{{ value }}</li>
+        {% endfor %}
+    </ul>
+
+
+	<table border="" cellspacing="" cellpadding="">
+		<thead>
+			<tr>
+				<td>序号</td>
+				<td>书名</td>
+				<td>作者</td>
+				<td>价格</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for book in books %}
+				{% if forloop.first %}
+					<tr style="background: red;">
+				{% elif forloop.last %}
+					<tr style="background: hotpink;">
+				{% else %}
+					<tr>
+				{% endif %}
+			
+					<!--  forloop.counter 当前是第几次遍历 从1开始  forloop.counter0 从0开始-->
+					<!--  revcounter反向最后一个是1 revcounter0反向最后一个是0-->
+					<td>{{ forloop.revcounter0 }}</td>
+					<td>{{ book.name }}</td>
+					<td>{{ book.author }}</td>
+					<td>{{ book.price }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+    <ul>
+    	{% for comment in comments %}
+			<li>{{ comment }}</li>
+<!--        forin 遍历 无数据-->
+		{% empty %}
+			<li>无评论</li>
+		{% endfor %}
+    </ul>
+	
+	<ul class="nav">
+		<li><a href="/">首页</a></li>
+		<li><a href="{% url 'book' %}">读书</a></li>
+		<li><a href="{% url 'movie' %}">电影</a></li>
+		<li><a href="{% url 'city' %}">同城</a></li>
+		<!-- 传参数 -->
+		<li><a href="{% url 'book_detail' book_id='1' category='444'%}">最火的一篇文章</a></li>
+		<li><a href="{% url 'login' %}?next=/">登录</a></li>
+	</ul>
+
+</body>
+</html>

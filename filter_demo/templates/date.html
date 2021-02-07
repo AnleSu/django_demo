@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    {{ today|date:"Y/m/d" }}
+    {{ today|date:"d-m-Y" }}
+{#    n 月份1-9前面没有0 #}
+    {{ today|date:"d-n-Y" }}
+{#   j 天1-9前面没有0 #}
+    {{ today|date:"j-n-Y" }}
+
+    {{ today|date:"Y/m/d g" }}
+
+    {{ today|date:"Y/m/d H:i" }}
+</body>
+</html>
